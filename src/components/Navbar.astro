@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+---
+
+<nav 
+  class="w-full bg-custom-white p-5 mt-5"
+  x-data="{ isVisible: false }"
+  x-init="setTimeout(() => isVisible = true, 100)"
+>
+  <div class="container mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <div 
+      class="text-custom-black text-2xl font-playfair font-bold transition-all duration-1000 ease-out"
+      :class="isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'"
+    >
+      <a href="/" class="block">
+        <img 
+          src="/src/assets/Images/myLogo.png" 
+          alt="logo" 
+          class="w-[150px] h-auto transition-all duration-300 hover:scale-105"
+        />
+      </a>
+    </div>
+
+    <div 
+    class="flex items-center gap-8 transition-all duration-1000 ease-out delay-200"
+    :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'"
+  >
+    <a 
+      href="/home" 
+      class="text-custom-black text-xl font-montserrat hover:text-custom-gold transition-all duration-300 relative group hover:scale-105"
+      x-on:click="$el.classList.add('scale-95'); setTimeout(() => $el.classList.remove('scale-95'), 200)"
+    >
+      Home
+      <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-custom-gold transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a 
+      href="/about" 
+      class="text-custom-black text-xl font-montserrat hover:text-custom-gold transition-all duration-300 relative group hover:scale-105"
+      x-on:click="$el.classList.add('scale-95'); setTimeout(() => $el.classList.remove('scale-95'), 200)"
+    >
+      About Me
+      <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-custom-gold transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a 
+      href="/work" 
+      class="text-custom-black text-xl font-montserrat hover:text-custom-gold transition-all duration-300 relative group hover:scale-105"
+      x-on:click="$el.classList.add('scale-95'); setTimeout(() => $el.classList.remove('scale-95'), 200)"
+    >
+      My Work
+      <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-custom-gold transition-all duration-300 group-hover:w-full"></span>
+    </a>
+  </div>
+
+    <!-- Button -->
+    <div 
+      class="transition-all duration-1000 ease-out delay-400"
+      :class="isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'"
+    >
+      <button 
+        class="bg-custom-gold text-custom-black text-xl font-montserrat px-6 py-2 rounded-lg hover:bg-custom-pink transition-colors"
+        x-on:mouseenter="$el.classList.add('rotate-2', 'shadow-lg')"
+        x-on:mouseleave="$el.classList.remove('rotate-2', 'shadow-lg')"
+        x-on:click="$event.preventDefault(); $el.classList.add('scale-95'); setTimeout(() => $el.classList.remove('scale-95'), 200)"
+      >
+        Teams!
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Include Alpine.js -->
+<script src="//unpkg.com/alpinejs" defer></script>
