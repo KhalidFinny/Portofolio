@@ -39,3 +39,35 @@ body {
 .slide-in {
   animation: slideIn 1s ease-in-out;
 }
+
+:root {
+  --custom-white: #F5F5F5;
+  --custom-black: #2E2E2E;
+  --custom-pink: #E1C6CC;
+  --custom-green: #B2C2B5;
+  --custom-gold: #D4C48F;
+}
+
+.bg-custom-white {
+  background-color: var(--custom-white);
+}
+
+.text-custom-black {
+  color: var(--custom-black);
+}
+
+.text-custom-gold {
+  color: var(--custom-gold);
+}
+
+.bg-custom-gold {
+  background-color: var(--custom-gold);
+}
+
+.bg-custom-pink {
+  background-color: var(--custom-pink);
+}
+
+.hover\:bg-custom-pink\/50:hover {
+  background-color: rgba(225, 198, 204, 0.5);
+}
