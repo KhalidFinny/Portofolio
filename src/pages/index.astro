@@ -1,9 +1,7 @@
 ---
-import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import '../styles/global.css';
 ---
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -11,16 +9,23 @@ import '../styles/global.css';
     <meta name="generator" content={Astro.generator} />
     <title>My Portfolio</title>
   </head>
-  <body>
-    <header>
-      <Navbar />
-    </header>
+  <body class="bg-custom-white" x-data="{ selectedTeam: null }" x-on:team-selected.window="selectedTeam = $event.detail.team" :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].DEFAULT};` : 'background-color: var(--custom-white);'">
     <main>
       <div>
         <Hero />
       </div>
     </main>
     <!-- Include Alpine.js -->
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <script  src="//unpkg.com/alpinejs" defer>
+      // Define teamColors globally so it can be accessed in the body's :style directive
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('teamColors', () => ({
+          warriors: { DEFAULT: '#1D428A', secondary: '#FFC72C' },
+          'mclaren-2024': { DEFAULT: '#FF8700', secondary: '#000000' },
+          'malboro-mclaren': { DEFAULT: '#FF0000', secondary: '#FFFFFF' },
+          'hakkinen-mclaren': { DEFAULT: '#C0C0C0', secondary: '#000000', accent: '#000000' }
+        }));
+      });
+    </script>
   </body>
 </html>
