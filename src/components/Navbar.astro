@@ -13,6 +13,9 @@ import '../styles/global.css';
     'hakkinen-mclaren': { DEFAULT: '#C0C0C0', secondary: '#000000', accent: '#000000', logo: '/src/assets/Images/Mikalogo.png' }
   }"
   x-on:team-selected.window="selectedTeam = $event.detail.team"
+  x-transition:enter="transition ease-out duration-500"
+  x-transition:enter-start="opacity-0 translate-y-10"
+  x-transition:enter-end="opacity-100 translate-y-0"
 >
   <div class="container mx-auto flex items-center justify-between">
     <!-- Logo -->
@@ -33,6 +36,7 @@ import '../styles/global.css';
         href="/" 
         class="text-xl font-montserrat hover:text-custom-gold transition-all duration-300 relative group"
         :style="selectedTeam ? `color: ${teamColors[selectedTeam].secondary};` : 'color: var(--custom-black);'"
+        @click.prevent="$dispatch('change-section', { section: 0 })"
       >
         Home
         <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-custom-gold transition-all duration-300 group-hover:w-full"></span>
@@ -41,14 +45,16 @@ import '../styles/global.css';
         href="#aboutme"
         class="text-xl font-montserrat hover:text-custom-gold transition-all duration-300 relative group"
         :style="selectedTeam ? `color: ${teamColors[selectedTeam].secondary};` : 'color: var(--custom-black);'"
+        @click.prevent="$dispatch('change-section', { section: 1 })"
       >
         About Me
         <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-custom-gold transition-all duration-300 group-hover:w-full"></span>
       </a>
       <a 
-        href="#" 
+        href="#mywork" 
         class="text-xl font-montserrat hover:text-custom-gold transition-all duration-300 relative group"
         :style="selectedTeam ? `color: ${teamColors[selectedTeam].secondary};` : 'color: var(--custom-black);'"
+        @click.prevent="$dispatch('change-section', { section: 2 })"
       >
         My Work
         <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-custom-gold transition-all duration-300 group-hover:w-full"></span>
@@ -58,7 +64,7 @@ import '../styles/global.css';
     <!-- Teams Dropdown Button -->
     <div class="relative">
       <button 
-        class="text-xl font-montserrat px-6 py-2 rounded-lg hover:bg-custom-pink transition-colors"
+        class="text-xl font-montserrat px-6 py-2 rounded-lg hover:bg-custom-pink transition-colors duration-300"
         :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].secondary}; color: ${teamColors[selectedTeam].DEFAULT};` : 'background-color: var(--custom-gold); color: var(--custom-black);'"
         @click="isDropdownOpen = !isDropdownOpen"
       >
@@ -80,31 +86,31 @@ import '../styles/global.css';
       >
         <div class="py-2">
           <button 
-            class="w-full text-left px-4 py-2 text-custom-black hover:bg-custom-pink/50"
+            class="w-full text-left px-4 py-2 text-custom-black hover:bg-custom-pink/50 transition-colors duration-300"
             @click="$dispatch('team-selected', { team: 'warriors' }); isDropdownOpen = false;"
           >
-            GSW
+            Splash Brothers
           </button>
           <button 
-            class="w-full text-left px-4 py-2 text-custom-black hover:bg-custom-pink/50"
+            class="w-full text-left px-4 py-2 text-custom-black hover:bg-custom-pink/50 transition-colors duration-300"
             @click="$dispatch('team-selected', { team: 'mclaren-2024' }); isDropdownOpen = false;"
           >
             MCL24
           </button>
           <button 
-            class="w-full text-left px-4 py-2 text-custom-black hover:bg-custom-pink/50"
+            class="w-full text-left px-4 py-2 text-custom-black hover:bg-custom-pink/50 transition-colors duration-300"
             @click="$dispatch('team-selected', { team: 'malboro-mclaren' }); isDropdownOpen = false;"
           >
-            MCLSenna
+            Malboro Livery
           </button>
           <button 
-            class="w-full text-left px-4 py-2 text-custom-black hover:bg-custom-pink/50"
+            class="w-full text-left px-4 py-2 text-custom-black hover:bg-custom-pink/50 transition-colors duration-300"
             @click="$dispatch('team-selected', { team: 'hakkinen-mclaren' }); isDropdownOpen = false;"
           >
             MCL Hakkinen
           </button>
           <button 
-            class="w-full text-left px-4 py-2 text-custom-black hover:bg-custom-pink/50"
+            class="w-full text-left px-4 py-2 text-custom-black hover:bg-custom-pink/50 transition-colors duration-300"
             @click="$dispatch('team-selected', { team: null }); isDropdownOpen = false;"
           >
             Default
