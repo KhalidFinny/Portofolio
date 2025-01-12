@@ -3,6 +3,8 @@ import Programming from '../components/Programming.astro';
 import '../styles/global.css';
 import { supabase } from '../SupabaseClient';
 ---
+
+</script>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -16,17 +18,5 @@ import { supabase } from '../SupabaseClient';
         <Programming />
       </div>
     </main>
-    <!-- Include Alpine.js -->
-    <script  src="//unpkg.com/alpinejs" defer>
-      // Define teamColors globally so it can be accessed in the body's :style directive
-      document.addEventListener('alpine:init', () => {
-        Alpine.data('teamColors', () => ({
-          warriors: { DEFAULT: '#1D428A', secondary: '#FFC72C' },
-          'mclaren-2024': { DEFAULT: '#FF8700', secondary: '#000000' },
-          'malboro-mclaren': { DEFAULT: '#FF0000', secondary: '#FFFFFF' },
-          'hakkinen-mclaren': { DEFAULT: '#C0C0C0', secondary: '#000000', accent: '#000000' }
-        }));
-      });
-    </script>
   </body>
 </html>
