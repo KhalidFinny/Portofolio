@@ -1,6 +1,8 @@
 ---
 import Hero from '../components/Hero.astro';
 import '../styles/global.css';
+import Aboutme from '../components/aboutme.astro';
+import Work from '../components/work.astro';
 
 // Define the teamColors object
 const teamColors = {
@@ -32,6 +34,12 @@ const teamColors = {
       <div>
         <!-- Pass selectedTeam and teamColors to Hero -->
         <Hero selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
+      </div>
+      <div>
+        <Aboutme selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
+      </div>
+      <div>
+        <Work selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
       </div>
     </main>
   </body>

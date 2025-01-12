@@ -1,8 +1,11 @@
 ---
 import "../styles/global.css";
+import Navbar from "./Navbar.astro";
+const { selectedTeam, teamColors } = Astro.props;
 ---
-<script src="/path/to/globalState.js" defer></script>
-<!-- Shared Alpine.js State -->
+
+<script src="//unpkg.com/alpinejs" defer></script>
+
 <div
   x-data="{ 
     isDropdownOpen: false,
@@ -18,7 +21,7 @@ import "../styles/global.css";
   <div
     id="aboutme"
     class="w-full h-screen flex-shrink-0 px-[329px] flex flex-col items-center justify-center relative"
-    :style="$store.global.selectedTeam ? `background-color: ${$store.global.teamColors[$store.global.selectedTeam].DEFAULT};` : 'background-color: var(--custom-white);'"
+    :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
   >
     <!-- About Me Content -->
     <div
@@ -28,21 +31,21 @@ import "../styles/global.css";
       <div class="text-center mb-16">
         <h1
           class="text-8xl font-playfair font-bold mb-6 hover-animate"
-          :style="$store.global.selectedTeam ? `color: ${$store.global.teamColors[$store.global.selectedTeam].secondary};` : 'color: var(--custom-black);'"
+          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
         >
           HELLO XPLORERS!
         </h1>
 
         <h2
           class="text-4xl font-montserrat mb-8 hover-animate"
-          :style="$store.global.selectedTeam ? `color: ${$store.global.teamColors[$store.global.selectedTeam].secondary};` : 'color: var(--custom-black);'"
+          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
         >
           My name is Muhammad Khalid Atthoriq
         </h2>
 
         <p
           class="text-2xl font-montserrat max-w-4xl mx-auto leading-relaxed hover-animate"
-          :style="$store.global.selectedTeam ? `color: ${$store.global.teamColors[$store.global.selectedTeam].secondary};` : 'color: var(--custom-black);'"
+          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
         >
           I'm a passionate creator with expertise in front-end development,
           design, and multimedia. I love bringing ideas to life through code
@@ -74,7 +77,7 @@ import "../styles/global.css";
             </div>
             <span
               class="text-xl font-montserrat font-medium text-custom-black transition-all duration-300 group-hover:text-custom-gold"
-              :style="$store.global.selectedTeam ? `color: ${$store.global.teamColors[$store.global.selectedTeam].secondary};` : 'color: var(--custom-black);'"
+              :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
               >Projects</span
             >
           </div>
@@ -102,7 +105,7 @@ import "../styles/global.css";
             </div>
             <span
               class="text-xl font-montserrat font-medium text-custom-black transition-all duration-300 group-hover:text-custom-gold"
-              :style="$store.global.selectedTeam ? `color: ${$store.global.teamColors[$store.global.selectedTeam].secondary};` : 'color: var(--custom-black);'"
+              :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
               >My CV</span
             >
           </div>
@@ -130,7 +133,7 @@ import "../styles/global.css";
             </div>
             <span
               class="text-xl font-montserrat font-medium text-custom-black transition-all duration-300 group-hover:text-custom-gold"
-              :style="$store.global.selectedTeam ? `color: ${$store.global.teamColors[$store.global.selectedTeam].secondary};` : 'color: var(--custom-black);'"
+              :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
               >Contact Me</span
             >
           </div>
@@ -186,5 +189,3 @@ import "../styles/global.css";
     </div>
   </div>
 </div>
-
-<script src="//unpkg.com/alpinejs" defer></script>
