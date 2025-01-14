@@ -1,4 +1,5 @@
 ---
+import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import '../styles/global.css';
 import Aboutme from '../components/aboutme.astro';
@@ -18,6 +19,11 @@ const teamColors = {
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>My Portfolio</title>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
   </head>
   <body 
     class="bg-custom-white" 
@@ -31,16 +37,17 @@ const teamColors = {
     :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
   >
     <main>
-      <div>
+      <Navbar selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
+      <div id="home">
         <!-- Pass selectedTeam and teamColors to Hero -->
         <Hero selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
       </div>
-      <div>
+      <section id="aboutme">
         <Aboutme selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
-      </div>
-      <div>
+      </section>
+      <section id="work">
         <Work selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
-      </div>
+      </section>
     </main>
   </body>
 </html>

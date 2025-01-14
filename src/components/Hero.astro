@@ -1,38 +1,40 @@
 ---
 import "../styles/global.css";
-import Navbar from "./Navbar.astro";
 const { selectedTeam, teamColors } = Astro.props;
 ---
 
 <script src="//unpkg.com/alpinejs" defer></script>
 
-<!-- Navbar -->
-<Navbar />
+<!-- Intersection Observer for Animations -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-initial').forEach(observer.observe.bind(observer));
+  });
+</script>
 
 <!-- Hero Section -->
 <main 
   id="home"
   class="h-screen w-full bg-[#F5F5F5] relative overflow-hidden"
-  x-data="{ hover: false }"
-  :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base}` : ''"
+  x-data="{ hover: false, loaded: false }"
+  :style="selectedTeam && `background-color: ${teamColors[selectedTeam].base}`"
+  x-init="setTimeout(() => loaded = true, 100)"
 >
-  <!-- Background Elements -->
-  <div class="absolute inset-0">
-    <div 
-      class="absolute w-96 h-96 rounded-full border border-[#D4C48F] opacity-10 -top-20 -left-20"
-      :style="selectedTeam ? `border-color: ${teamColors[selectedTeam].secondary}` : ''"
-    ></div>
-    <div 
-      class="absolute w-72 h-72 rounded-full border border-[#E1C6CC] opacity-10 -bottom-10 -right-10"
-      :style="selectedTeam ? `border-color: ${teamColors[selectedTeam].secondary}` : ''"
-    ></div>
-  </div>
-
   <div class="w-full h-full max-w-8xl mx-auto px-8 md:px-16 flex flex-col justify-center">
     <!-- Title Section -->
     <h1 
-      class="font-fairplay text-6xl md:text-7xl lg:text-8xl text-[#2E2E2E] font-bold text-center mb-12 leading-tight"
-      :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
+      class="font-fairplay text-6xl md:text-7xl lg:text-8xl text-[#2E2E2E] font-bold text-center mb-12 leading-tight opacity-0 translate-y-8 animate-initial transition-all duration-1000"
+      :class="{ 'animate-in': loaded }"
+      :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
     >
       Muhammad Khalid Atthoriq
     </h1>
@@ -40,46 +42,39 @@ const { selectedTeam, teamColors } = Astro.props;
     <!-- Main Content Section -->
     <div class="grid grid-cols-3 gap-12 items-start mt-8">
       <!-- Left Content - Specialties -->
-      <div class="text-right self-center space-y-6 pr-8">
+      <div 
+        class="text-right self-center space-y-6 pr-8 opacity-0 -translate-x-8 animate-initial transition-all duration-1000 delay-300"
+        :class="{ 'animate-in': loaded }"
+      >
         <h2 
           class="font-montserrat text-3xl text-[#2E2E2E] mb-8 flex items-center justify-end"
-          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
+          :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
         >
           Specialties
           <span 
             class="w-8 h-[2px] bg-[#D4C48F] ml-3"
-            :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].secondary}` : ''"
+            :style="selectedTeam && `background-color: ${teamColors[selectedTeam].secondary}`"
           ></span>
         </h2>
+        <!-- Specialties content -->
         <div 
-          class="font-montserrat text-xl text-[#2E2E2E] hover:text-[#D4C48F] transition-colors duration-300"
-          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
+          class="space-y-6"
+          x-data="{ specialties: ['Front-End Developer', 'UI/UX Designer', 'Videographer', 'Photographer'] }"
         >
-          Front-End Developer
-        </div>
-        <div 
-          class="font-montserrat text-xl text-[#2E2E2E] hover:text-[#D4C48F] transition-colors duration-300"
-          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-        >
-          UI/UX Designer
-        </div>
-        <div 
-          class="font-montserrat text-xl text-[#2E2E2E] hover:text-[#D4C48F] transition-colors duration-300"
-          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-        >
-          Videographer
-        </div>
-        <div 
-          class="font-montserrat text-xl text-[#2E2E2E] hover:text-[#D4C48F] transition-colors duration-300"
-          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-        >
-          Photographer
+          <template x-for="(specialty, index) in specialties" :key="index">
+            <div 
+              class="font-montserrat text-xl text-[#2E2E2E] hover:text-[#D4C48F] transition-all duration-300"
+              :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
+              x-text="specialty"
+            ></div>
+          </template>
         </div>
       </div>
 
       <!-- Center Image -->
       <div 
-        class="relative w-full aspect-square max-w-3xl mx-auto -mt-12"
+        class="relative w-full aspect-square max-w-3xl mx-auto -mt-12 opacity-0 scale-95 animate-initial transition-all duration-1000 delay-200"
+        :class="{ 'animate-in': loaded }"
         @mouseenter="hover = true"
         @mouseleave="hover = false"
       >
@@ -87,46 +82,51 @@ const { selectedTeam, teamColors } = Astro.props;
         <div 
           class="absolute inset-0 rounded-full transition-transform duration-500"
           :class="{ 'scale-105': hover }"
-          :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent}20` : 'background-color: #D4C48F20;'"
+          :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent}` : 'background-color: #D4C48F20;'"
         ></div>
         
-        <!-- Image -->
+        <!-- Image with lazy loading -->
         <img
           src="/src/assets/Images/khalid-mainimage.webp"
           alt="Profile Image"
-          class="w-full h-full object-cover rounded-full relative transition-transform duration-500"
+          loading="lazy"
+          class="w-full h-full object-cover rounded-full relative transition-all duration-500"
           :class="{ 'scale-105': hover }"
         />
       </div>
 
       <!-- Right Content - Experience -->
-      <div class="text-left self-center space-y-8 pl-8">
+      <div 
+        class="text-left self-center space-y-8 pl-8 opacity-0 translate-x-8 animate-initial transition-all duration-1000 delay-300"
+        :class="{ 'animate-in': loaded }"
+      >
+        <!-- Experience content remains the same -->
         <h2 
           class="font-montserrat text-3xl text-[#2E2E2E] mb-8 flex items-center"
-          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
+          :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
         >
           <span 
             class="w-8 h-[2px] bg-[#D4C48F] mr-3"
-            :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].secondary}` : ''"
+            :style="selectedTeam && `background-color: ${teamColors[selectedTeam].secondary}`"
           ></span>
           Experience
         </h2>
         <div class="space-y-4">
           <p 
             class="font-montserrat text-xl text-[#2E2E2E] font-medium"
-            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
+            :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
           >
             Creative Team Leader
           </p>
           <p 
             class="font-montserrat text-lg text-[#2E2E2E]/80"
-            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
+            :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
           >
             Workshop Rist Informatika
           </p>
           <p 
             class="font-montserrat text-base text-[#D4C48F] font-bold"
-            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
+            :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
           >
             2024-2025
           </p>
@@ -134,21 +134,39 @@ const { selectedTeam, teamColors } = Astro.props;
       </div>
     </div>
   </div>
-
-  <!-- Decorative Bottom Element -->
-  <div class="absolute bottom-8 left-8 flex items-center space-x-3">
-    <div 
-      class="w-12 h-[1px] bg-[#D4C48F]"
-      :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].secondary}` : ''"
-    ></div>
-    <span 
-      class="font-montserrat text-sm text-[#2E2E2E]/60"
-      :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-    >
-      Portfolio 2024
-    </span>
-  </div>
-  <section>
-
-  </section>
 </main>
+
+<style>
+  .animate-initial {
+    opacity: 0;
+  }
+  
+  .animate-in {
+    opacity: 1 !important;
+    transform: translate(0, 0) scale(1) !important;
+  }
+
+  /* Add a simple fade-in animation for the title, specialties, and experiences */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Apply the animation to the title, specialties, and experiences */
+  h1,
+  .text-right h2, .text-right div,
+  .text-left h2, .text-left div {
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  /* Ensure the cursor remains normal (default) for all text */
+  h1, h2, p, span, div {
+    cursor: default;
+  }
+</style>

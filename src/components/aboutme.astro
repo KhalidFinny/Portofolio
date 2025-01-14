@@ -6,186 +6,174 @@ const { selectedTeam, teamColors } = Astro.props;
 
 <script src="//unpkg.com/alpinejs" defer></script>
 
+<!-- About Me Section -->
 <div
-  x-data="{ 
-    isDropdownOpen: false,
-    currentSection: 0
-  }"
-  x-init="
-    if (window.location.hash === '#aboutme') currentSection = 1;
-    if (window.location.hash === '#mywork') currentSection = 2;
-  "
-  @change-section.window="currentSection = $event.detail.section"
+  class="w-full h-screen flex-shrink-0 px-8 md:px-16 lg:px-32 flex flex-col items-center justify-center relative"
+  :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
 >
-  <!-- About Me Section -->
-  <div
-    id="aboutme"
-    class="w-full h-screen flex-shrink-0 px-[329px] flex flex-col items-center justify-center relative"
-    :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
-  >
-    <!-- About Me Content -->
-    <div
-      class="flex flex-col items-center justify-center h-full max-w-6xl w-full -mt-20"
-    >
-      <!-- Title Group -->
-      <div class="text-center mb-16">
-        <h1
-          class="text-8xl font-playfair font-bold mb-6 hover-animate"
-          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
-        >
-          HELLO XPLORERS!
-        </h1>
+  <!-- About Me Content -->
+  <div class="w-full max-w-6xl mx-auto text-center">
+    <!-- Title Group -->
+    <div class="mb-16">
+      <h1
+        class="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90"
+        :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
+      >
+        HELLO XPLORERS!
+      </h1>
 
-        <h2
-          class="text-4xl font-montserrat mb-8 hover-animate"
-          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
-        >
-          My name is Muhammad Khalid Atthoriq
-        </h2>
+      <h2
+        class="text-2xl md:text-3xl lg:text-4xl font-medium mb-8 opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90 font-montserrat"
+        :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
+      >
+        My name is Muhammad Khalid Atthoriq
+      </h2>
 
-        <p
-          class="text-2xl font-montserrat max-w-4xl mx-auto leading-relaxed hover-animate"
-          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
-        >
-          I'm a passionate creator with expertise in front-end development,
-          design, and multimedia. I love bringing ideas to life through code
-          and creativity.
-        </p>
-      </div>
-
-      <!-- Icons Grid -->
-      <div class="grid grid-cols-3 gap-24 mt-12">
-        <!-- Projects Card -->
-        <button class="group">
-          <div class="flex flex-col items-center space-y-4">
-            <div
-              class="w-28 h-28 rounded-2xl bg-custom-pink flex items-center justify-center transform transition-all duration-300 group-hover:bg-custom-gold group-hover:scale-105 group-hover:shadow-lg"
-            >
-              <svg
-                class="w-12 h-12 text-custom-black"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                ></path>
-              </svg>
-            </div>
-            <span
-              class="text-xl font-montserrat font-medium text-custom-black transition-all duration-300 group-hover:text-custom-gold"
-              :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
-              >Projects</span
-            >
-          </div>
-        </button>
-
-        <!-- CV Card -->
-        <button class="group">
-          <div class="flex flex-col items-center space-y-4">
-            <div
-              class="w-28 h-28 rounded-2xl bg-custom-pink flex items-center justify-center transform transition-all duration-300 group-hover:bg-custom-gold group-hover:scale-105 group-hover:shadow-lg"
-            >
-              <svg
-                class="w-12 h-12 text-custom-black"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                ></path>
-              </svg>
-            </div>
-            <span
-              class="text-xl font-montserrat font-medium text-custom-black transition-all duration-300 group-hover:text-custom-gold"
-              :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
-              >My CV</span
-            >
-          </div>
-        </button>
-
-        <!-- Contact Card -->
-        <button class="group">
-          <div class="flex flex-col items-center space-y-4">
-            <div
-              class="w-28 h-28 rounded-2xl bg-custom-pink flex items-center justify-center transform transition-all duration-300 group-hover:bg-custom-gold group-hover:scale-105 group-hover:shadow-lg"
-            >
-              <svg
-                class="w-12 h-12 text-custom-black"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
-                ></path>
-              </svg>
-            </div>
-            <span
-              class="text-xl font-montserrat font-medium text-custom-black transition-all duration-300 group-hover:text-custom-gold"
-              :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
-              >Contact Me</span
-            >
-          </div>
-        </button>
-      </div>
+      <p
+        class="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90 font-montserrat"
+        :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
+      >
+        I'm a passionate creator with expertise in front-end development,
+        design, and multimedia. I love bringing ideas to life through code
+        and creativity.
+      </p>
     </div>
 
-    <!-- Navigation Arrows for About Me -->
-    <div
-      class="absolute left-12 top-1/2 -translate-y-1/2 flex flex-col items-center space-y-4"
-      x-show="currentSection === 1"
-    >
-      <button
-        @click="currentSection = 0"
-        class="group flex flex-col items-center transition-all duration-300"
-      >
-        <div
-          class="w-12 h-12 rounded-full border-2 border-custom-black flex items-center justify-center mb-2 group-hover:bg-custom-gold group-hover:border-custom-gold transition-all duration-300"
-        >
+    <!-- Icons Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 font-montserrat">
+      <!-- Projects Card -->
+      <button class="group opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300">
+        <div class="flex flex-col items-center space-y-4">
+          <div
+            class="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+            :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent};` : 'background-color: var(--custom-pink);'"
+          >
+            <svg
+              class="w-10 h-10"
+              :style="selectedTeam ? `color: ${teamColors[selectedTeam].base};` : 'color: var(--custom-black);'"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              ></path>
+            </svg>
+          </div>
           <span
-            class="text-2xl text-custom-black group-hover:text-custom-gold transition-all duration-300"
-            >&larr;</span
+            class="text-lg font-semibold transition-all duration-300 group-hover:scale-105"
+            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
+            >Projects</span
           >
         </div>
-        <span
-          class="text-sm font-montserrat text-custom-black opacity-0 group-hover:opacity-100 transition-all duration-300"
-          >Home</span
-        >
       </button>
-    </div>
 
-    <div
-      class="absolute right-12 top-1/2 -translate-y-1/2 flex flex-col items-center space-y-4"
-      x-show="currentSection === 1"
-    >
-      <button
-        @click="currentSection = 2"
-        class="group flex flex-col items-center transition-all duration-300"
-      >
-        <div
-          class="w-12 h-12 rounded-full border-2 border-custom-black flex items-center justify-center mb-2 group-hover:bg-custom-gold group-hover:border-custom-gold transition-all duration-300"
-        >
+      <!-- CV Card -->
+      <button class="group opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300">
+        <div class="flex flex-col items-center space-y-4">
+          <div
+            class="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+            :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent};` : 'background-color: var(--custom-pink);'"
+          >
+            <svg
+              class="w-10 h-10"
+              :style="selectedTeam ? `color: ${teamColors[selectedTeam].base};` : 'color: var(--custom-black);'"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ></path>
+            </svg>
+          </div>
           <span
-            class="text-2xl text-custom-black group-hover:text-custom-gold transition-all duration-300"
-            >&rarr;</span
+            class="text-lg font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
+            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
+            >My CV</span
           >
         </div>
-        <span
-          class="text-sm font-montserrat text-custom-black opacity-0 group-hover:opacity-100 transition-all duration-300"
-          >My Work</span
-        >
+      </button>
+
+      <!-- Contact Card -->
+      <button class="group opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300">
+        <div class="flex flex-col items-center space-y-4">
+          <div
+            class="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+            :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent};` : 'background-color: var(--custom-pink);'"
+          >
+            <svg
+              class="w-10 h-10"
+              :style="selectedTeam ? `color: ${teamColors[selectedTeam].base};` : 'color: var(--custom-black);'"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+              ></path>
+            </svg>
+          </div>
+          <span
+            class="text-lg font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
+            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
+            >Contact Me</span
+          >
+        </div>
       </button>
     </div>
   </div>
 </div>
+
+<!-- Intersection Observer Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-initial').forEach(observer.observe.bind(observer));
+  });
+</script>
+
+<style>
+  /* Animation Classes */
+  .animate-initial {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Hover Animations for Title and Text */
+  h1, h2, p {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  h1:hover, h2:hover, p:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  /* Ensure the cursor remains default */
+  button, h1, h2, p, span, div {
+    cursor: default;
+  }
+</style>
