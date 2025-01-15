@@ -1,13 +1,12 @@
 ---
 import "../styles/global.css";
-import Navbar from "./Navbar.astro";
 const { selectedTeam, teamColors } = Astro.props;
 ---
 
 <script src="//unpkg.com/alpinejs" defer></script>
 
 <!-- About Me Section -->
-<div
+<section id="aboutme"
   class="w-full h-screen flex-shrink-0 px-8 md:px-16 lg:px-32 flex flex-col items-center justify-center relative"
   :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
 >
@@ -40,46 +39,16 @@ const { selectedTeam, teamColors } = Astro.props;
     </div>
 
     <!-- Icons Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 font-montserrat">
-      <!-- Projects Card -->
-      <button class="group opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300">
-        <div class="flex flex-col items-center space-y-4">
-          <div
-            class="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
-            :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent};` : 'background-color: var(--custom-pink);'"
-          >
-            <svg
-              class="w-10 h-10"
-              :style="selectedTeam ? `color: ${teamColors[selectedTeam].base};` : 'color: var(--custom-black);'"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-              ></path>
-            </svg>
-          </div>
-          <span
-            class="text-lg font-semibold transition-all duration-300 group-hover:scale-105"
-            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
-            >Projects</span
-          >
-        </div>
-      </button>
-
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 font-montserrat">
       <!-- CV Card -->
       <button class="group opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300">
-        <div class="flex flex-col items-center space-y-4">
+        <div class="flex flex-col items-center space-y-6">
           <div
-            class="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+            class="w-32 h-32 md:w-36 md:h-36 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
             :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent};` : 'background-color: var(--custom-pink);'"
           >
             <svg
-              class="w-10 h-10"
+              class="w-16 h-16"
               :style="selectedTeam ? `color: ${teamColors[selectedTeam].base};` : 'color: var(--custom-black);'"
               fill="none"
               stroke="currentColor"
@@ -94,7 +63,7 @@ const { selectedTeam, teamColors } = Astro.props;
             </svg>
           </div>
           <span
-            class="text-lg font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
+            class="text-xl font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
             >My CV</span
           >
@@ -103,13 +72,13 @@ const { selectedTeam, teamColors } = Astro.props;
 
       <!-- Contact Card -->
       <button class="group opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300">
-        <div class="flex flex-col items-center space-y-4">
+        <div class="flex flex-col items-center space-y-6">
           <div
-            class="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+            class="w-32 h-32 md:w-36 md:h-36 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
             :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent};` : 'background-color: var(--custom-pink);'"
           >
             <svg
-              class="w-10 h-10"
+              class="w-16 h-16"
               :style="selectedTeam ? `color: ${teamColors[selectedTeam].base};` : 'color: var(--custom-black);'"
               fill="none"
               stroke="currentColor"
@@ -124,7 +93,7 @@ const { selectedTeam, teamColors } = Astro.props;
             </svg>
           </div>
           <span
-            class="text-lg font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
+            class="text-xl font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
             >Contact Me</span
           >
@@ -132,7 +101,7 @@ const { selectedTeam, teamColors } = Astro.props;
       </button>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Intersection Observer Script -->
 <script>

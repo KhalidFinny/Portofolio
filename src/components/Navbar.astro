@@ -47,9 +47,9 @@ import '../styles/global.css';
         <a 
           href="#home"
           class="relative group py-2"
-          :class="activeSection === 0 ? 'text-custom-gold font-bold' : ''"
+          :class="activeSection === 0 ? 'text-custom-gold' : ''"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-          @click.prevent="activeSection = 0"
+          @click.prevent="activeSection = 0; window.scrollTo({ top: 0, behavior: 'smooth' })"
         >
           <span class="text-2xl font-montserrat relative z-10 transition-colors duration-300 group-hover:text-custom-gold">Home</span>
           <span class="absolute bottom-0 left-0 w-full h-[1px] bg-custom-gold transform origin-right scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -57,9 +57,9 @@ import '../styles/global.css';
         <a 
           href="#aboutme"
           class="relative group py-2"
-          :class="activeSection === 1 ? 'text-custom-gold font-bold' : ''"
+          :class="activeSection === 1 ? 'text-custom-gold' : ''"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-          @click.prevent="activeSection = 1"
+          @click.prevent="activeSection = 1; document.getElementById('aboutme').scrollIntoView({ behavior: 'smooth' })"
         >
           <span class="text-2xl font-montserrat relative z-10 transition-colors duration-300 group-hover:text-custom-gold">About Me</span>
           <span class="absolute bottom-0 left-0 w-full h-[1px] bg-custom-gold transform origin-right scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -67,9 +67,9 @@ import '../styles/global.css';
         <a 
           href="#work"
           class="relative group py-2"
-          :class="activeSection === 2 ? 'text-custom-gold font-bold' : ''"
+          :class="activeSection === 2 ? 'text-custom-gold ' : ''"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-          @click.prevent="activeSection = 2"
+          @click.prevent="activeSection = 2; document.getElementById('work').scrollIntoView({ behavior: 'smooth' })"
         >
           <span class="text-2xl font-montserrat relative z-10 transition-colors duration-300 group-hover:text-custom-gold">My Work</span>
           <span class="absolute bottom-0 left-0 w-full h-[1px] bg-custom-gold transform origin-right scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>

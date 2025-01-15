@@ -1,40 +1,44 @@
 ---
 import "../styles/global.css";
-const { selectedTeam, teamColors } = Astro.props;
 ---
 
 <script src="//unpkg.com/alpinejs" defer></script>
-
-<!-- Intersection Observer for Animations -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.animate-initial').forEach(observer.observe.bind(observer));
-  });
-</script>
 
 <!-- Hero Section -->
 <main 
   id="home"
   class="h-screen w-full bg-[#F5F5F5] relative overflow-hidden"
-  x-data="{ hover: false, loaded: false }"
-  :style="selectedTeam && `background-color: ${teamColors[selectedTeam].base}`"
-  x-init="setTimeout(() => loaded = true, 100)"
+  x-data="{
+    hover: false, 
+    loaded: false, 
+    selectedTeam: null,
+    teamColors: {
+      warriors: { base: '#1D428A', accent: '#FFC72C' },
+      'mclaren-2024': { base: '#FF8700', accent: '#000000' },
+      'malboro-mclaren': { base: '#FF0000', accent: '#FFFFFF' },
+      'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000' }
+    },
+    teamImages: {
+      warriors: '/src/assets/Images/Splashbros.webp',
+      'mclaren-2024': '/src/assets/Images/mcl24.webp',
+      'malboro-mclaren': '/src/assets/Images/Marlboro.webp',
+      'hakkinen-mclaren': '/src/assets/Images/mikapic.webp'
+    }
+  }"
+  :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base}` : ''"
+  x-init="
+    setTimeout(() => loaded = true, 100);
+    window.addEventListener('team-selected', (event) => {
+      selectedTeam = event.detail.team;
+    });
+  "
 >
   <div class="w-full h-full max-w-8xl mx-auto px-8 md:px-16 flex flex-col justify-center">
     <!-- Title Section -->
     <h1 
       class="font-fairplay text-6xl md:text-7xl lg:text-8xl text-[#2E2E2E] font-bold text-center mb-12 leading-tight opacity-0 translate-y-8 animate-initial transition-all duration-1000"
       :class="{ 'animate-in': loaded }"
-      :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
+      :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
     >
       Muhammad Khalid Atthoriq
     </h1>
@@ -48,12 +52,12 @@ const { selectedTeam, teamColors } = Astro.props;
       >
         <h2 
           class="font-montserrat text-3xl text-[#2E2E2E] mb-8 flex items-center justify-end"
-          :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
+          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
         >
           Specialties
           <span 
             class="w-8 h-[2px] bg-[#D4C48F] ml-3"
-            :style="selectedTeam && `background-color: ${teamColors[selectedTeam].secondary}`"
+            :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].secondary}` : ''"
           ></span>
         </h2>
         <!-- Specialties content -->
@@ -64,7 +68,7 @@ const { selectedTeam, teamColors } = Astro.props;
           <template x-for="(specialty, index) in specialties" :key="index">
             <div 
               class="font-montserrat text-xl text-[#2E2E2E] hover:text-[#D4C48F] transition-all duration-300"
-              :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
+              :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
               x-text="specialty"
             ></div>
           </template>
@@ -87,7 +91,7 @@ const { selectedTeam, teamColors } = Astro.props;
         
         <!-- Image with lazy loading -->
         <img
-          src="/src/assets/Images/khalid-mainimage.webp"
+          :src="selectedTeam ? teamImages[selectedTeam] : '/src/assets/Images/khalid-mainimage.webp'"
           alt="Profile Image"
           loading="lazy"
           class="w-full h-full object-cover rounded-full relative transition-all duration-500"
@@ -103,30 +107,30 @@ const { selectedTeam, teamColors } = Astro.props;
         <!-- Experience content remains the same -->
         <h2 
           class="font-montserrat text-3xl text-[#2E2E2E] mb-8 flex items-center"
-          :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
+          :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
         >
           <span 
             class="w-8 h-[2px] bg-[#D4C48F] mr-3"
-            :style="selectedTeam && `background-color: ${teamColors[selectedTeam].secondary}`"
+            :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].secondary}` : ''"
           ></span>
           Experience
         </h2>
         <div class="space-y-4">
           <p 
             class="font-montserrat text-xl text-[#2E2E2E] font-medium"
-            :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
+            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
           >
             Creative Team Leader
           </p>
           <p 
             class="font-montserrat text-lg text-[#2E2E2E]/80"
-            :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
+            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
           >
             Workshop Rist Informatika
           </p>
           <p 
             class="font-montserrat text-base text-[#D4C48F] font-bold"
-            :style="selectedTeam && `color: ${teamColors[selectedTeam].accent}`"
+            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
           >
             2024-2025
           </p>

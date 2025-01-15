@@ -36,18 +36,17 @@ const teamColors = {
     x-on:team-selected.window="selectedTeam = $event.detail.team" 
     :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
   >
-    <main>
-      <Navbar selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
-      <div id="home">
-        <!-- Pass selectedTeam and teamColors to Hero -->
-        <Hero selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
-      </div>
-      <section id="aboutme">
-        <Aboutme selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
-      </section>
-      <section id="work">
-        <Work selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
-      </section>
-    </main>
+  <main>
+    <Navbar selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
+    <section id="home">
+      <Hero selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
+    </section>
+    <section id="aboutme">
+      <Aboutme selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
+    </section>
+    <section id="work">
+      <Work selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
+    </section>
+  </main>
   </body>
 </html>

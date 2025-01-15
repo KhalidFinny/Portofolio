@@ -1,14 +1,16 @@
 ---
 import "../styles/global.css";
 const { selectedTeam, teamColors } = Astro.props;
+
 ---
 
 <script src="//unpkg.com/alpinejs" defer></script>
 <!-- My Work Section -->
-<div
-  class="w-full h-screen flex-shrink-0 px-8 md:px-16 lg:px-24 flex flex-col items-center justify-center relative"
+<section id="work"
+  class="w-full min-h-screen flex-shrink-0 px-8 md:px-16 lg:px-24 flex flex-col items-center justify-center relative pt-20"
   :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
 >
+
   <!-- My Work Content -->
   <div class="w-full max-w-6xl mx-auto">
     <!-- Title -->
@@ -72,7 +74,7 @@ const { selectedTeam, teamColors } = Astro.props;
       </a>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Intersection Observer Script -->
 <script>
@@ -112,8 +114,4 @@ const { selectedTeam, teamColors } = Astro.props;
     opacity: 0.9;
   }
 
-  /* Ensure the cursor remains default */
-  a, h1, h2, p, span, div {
-    cursor: default;
-  }
 </style>
