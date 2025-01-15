@@ -1,88 +1,179 @@
 ---
-import "../styles/global.css";
-import Navbar from "./Navbar.astro";
-import { supabase } from '../SupabaseClient';
+import Navbar from '../components/Navbar.astro';
+import { createClient } from '@supabase/supabase-js';
 
-// Fetch Programming projects from Supabase (server-side rendering)
-const { data: programmingData, error } = await supabase
-  .from('Programming')
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+// Fetch projects
+const { data: projects, error } = await supabase
+  .from('Projects')
   .select('*')
   .order('created_at', { ascending: false });
 
-if (error) {
-  console.error('Error fetching Programming data:', error);
-}
+// Categories for side navigation
+const categories = [
+  { id: 'all', name: 'All', count: projects?.length || 0 },
+  { id: 'frontend', name: 'Front-End', count: projects?.filter(p => p.Type === 'Frontend').length || 0 },
+  { id: 'coming-soon', name: 'Coming Soon', count: 0 }
+];
 ---
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programming Portfolio</title>
-    <link rel="stylesheet" href="../styles/global.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-<body class="bg-custom-white" x-data="{
-    programmingData: [],
-    isLoading: true,
-    init() {
-        try {
-            const data = JSON.parse(`{{ JSON.stringify(programmingData || []) }}`);
-            this.programmingData = data;
-        } catch (error) {
-            console.error('Error parsing programming data:', error);
-            this.programmingData = [];
+    <title>Programming Projects</title>
+    <style>
+        @keyframes fadeUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
-        this.isLoading = false;
-    }
-}">
+
+        article {
+            animation: fadeUp 0.6s ease-out forwards;
+            opacity: 0;
+            animation-delay: calc(var(--index, 0) * 0.1s);
+        }
+
+        /* Ensure the side navigation does not overlap the content */
+        aside {
+            margin-left: 1rem;
+        }
+
+        main {
+            margin-left: 0; /* Adjusted to remove side navigation */
+        }
+
+        @media (max-width: 1024px) {
+            main {
+                margin-left: 0;
+            }
+        }
+
+        /* Larger cards */
+        .project-card {
+            width: 100%;
+            max-width: 800px; /* Adjusted to accommodate side-by-side layout */
+            margin: 0 auto;
+        }
+
+        /* Image preview container */
+        .image-preview {
+            flex: 1;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-left: 1.5rem; /* Space between text and image */
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Flex layout for side-by-side content */
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .card-content {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<script src="//unpkg.com/alpinejs" defer></script>
+<body class="bg-custom-white">
     <Navbar />
 
-    <!-- Header -->
-    <header class="max-w-6xl mx-auto p-8">
-        <h1 class="text-4xl font-bold text-custom-black mb-4 font-playfair">Programming</h1>
-        <p class="text-lg text-custom-black font-montserrat">All of my programming projects</p>
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <h1 class="font-playfair text-6xl md:text-7xl text-custom-black leading-tight">Programming Projects</h1>
+                <div class="w-16 h-1 bg-custom-pink my-8"></div>
+                <p class="font-montserrat text-lg text-custom-black/70 max-w-md">
+                </p>
+            </div>
+        </div>
     </header>
 
     <!-- Projects Grid -->
-    <main class="max-w-6xl mx-auto p-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Loading state -->
-            <template x-if="isLoading">
-                <div class="col-span-2 text-center">
-                    <p class="text-custom-black font-montserrat">Loading projects...</p>
-                </div>
-            </template>
+    <main class="px-6 pb-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects?.map((project, index) => (
+                <article class="group relative overflow-hidden bg-white p-6 project-card" style={`--index: ${index};`}>
+                    <div class="border border-custom-black/10 hover:border-custom-black transition-colors duration-300">
+                        <div class="p-6 card-content">
+                            <!-- Text Content -->
+                            <div class="flex-1">
+                                <h2 class="font-playfair text-2xl text-custom-black">{project.title}</h2>
+                                <div class="flex flex-col space-y-2 mt-4">
+                                    <a 
+                                        href={project.github_repo}
+                                        class="font-montserrat text-sm text-custom-black/70 hover:text-custom-black"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {project.github_repo}
+                                    </a>
+                                    <span class="font-montserrat text-sm text-custom-black/70">
+                                        Website: <span class="text-custom-gold">{project.website}</span>
+                                    </span>
+                                </div>
+                                <p class="font-montserrat text-sm text-custom-black/70 my-4">{project.description}</p>
+                            </div>
 
-            <!-- Render projects using Alpine.js -->
-            <template x-if="!isLoading && programmingData.length > 0">
-                <template x-for="project in programmingData" :key="project.id">
-                    <div class="project-container bg-white rounded-lg overflow-hidden border border-custom-gold">
-                        <div class="p-6 border-b border-custom-gold">
-                            <h2 class="text-2xl font-bold text-custom-black mb-2 font-montserrat" x-text="project.Title"></h2>
-                            <p class="text-sm text-custom-pink mb-2 font-montserrat">
-                                Type: <span x-text="project.Type || 'No type specified'"></span>
-                            </p>
-                        </div>
-                        <div class="p-6">
-                            <template x-if="project.image_url">
-                                <img :src="project.image_url" :alt="project.Title" class="w-full h-48 object-cover mb-4" />
-                            </template>
-                            <template x-if="!project.image_url">
-                                <p class="text-custom-black font-montserrat">No images available for this project.</p>
-                            </template>
+                            <!-- Image Preview Container -->
+                            {project.image_url && (
+                                <div class="image-preview">
+                                    <img 
+                                        src={project.image_url}
+                                        alt={project.title}
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
-                </template>
-            </template>
-
-            <!-- Show this message if no projects are found -->
-            <template x-if="!isLoading && programmingData.length === 0">
-                <p class="text-custom-black font-montserrat">No projects found.</p>
-            </template>
+                </article>
+            ))}
         </div>
+
+        {error && (
+            <div class="max-w-7xl mx-auto mt-12 p-6 bg-custom-pink/10 border border-custom-pink">
+                <p class="font-montserrat text-sm text-custom-black">Unable to load projects. Please try again.</p>
+            </div>
+        )}
     </main>
+
+    <script>
+        // Simple category filtering
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryLinks = document.querySelectorAll('a[href^="#"]');
+            
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = e.currentTarget as HTMLElement;
+                    const category = target.getAttribute('href')?.slice(1) || '';
+                    // Add your filtering logic here
+                    console.log('Selected category:', category);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

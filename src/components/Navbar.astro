@@ -45,9 +45,8 @@ import '../styles/global.css';
       <!-- Navigation Links with line animations -->
       <div class="hidden md:flex items-center space-x-12">
         <a 
-          href="#home"
+          href="/"
           class="relative group py-2"
-          :class="activeSection === 0 ? 'text-custom-gold' : ''"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
           @click.prevent="activeSection = 0; window.scrollTo({ top: 0, behavior: 'smooth' })"
         >
@@ -57,7 +56,6 @@ import '../styles/global.css';
         <a 
           href="#aboutme"
           class="relative group py-2"
-          :class="activeSection === 1 ? 'text-custom-gold' : ''"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
           @click.prevent="activeSection = 1; document.getElementById('aboutme').scrollIntoView({ behavior: 'smooth' })"
         >
@@ -67,7 +65,6 @@ import '../styles/global.css';
         <a 
           href="#work"
           class="relative group py-2"
-          :class="activeSection === 2 ? 'text-custom-gold ' : ''"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
           @click.prevent="activeSection = 2; document.getElementById('work').scrollIntoView({ behavior: 'smooth' })"
         >

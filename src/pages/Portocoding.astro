@@ -2,6 +2,13 @@
 import Programming from '../components/Programming.astro';
 import '../styles/global.css';
 import { supabase } from '../SupabaseClient';
+// Define the teamColors object
+const teamColors = {
+  warriors: { base: '#1D428A', accent: '#FFC72C', logo: '/src/assets/Images/Currylogo.webp' },
+  'mclaren-2024': { base: '#FF8700', accent: '#000000', logo: '/src/assets/Images/Landologo.webp' },
+  'malboro-mclaren': { base: '#FF0000', accent: '#FFFFFF', logo: '/src/assets/Images/Sennalogo.webp' },
+  'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000', logo: '/src/assets/Images/Mikalogo.webp' }
+};
 ---
 
 </script>
@@ -12,10 +19,20 @@ import { supabase } from '../SupabaseClient';
     <meta name="generator" content={Astro.generator} />
     <title>Programming Portofolio</title>
   </head>
-  <body class="bg-custom-white" x-data="{ selectedTeam: null }" x-on:team-selected.window="selectedTeam = $event.detail.team" :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].DEFAULT};` : 'background-color: var(--custom-white);'">
-    <main>
+  <body 
+    class="bg-custom-white" 
+    x-data="{ selectedTeam: null, teamColors: { 
+      warriors: { base: '#1D428A', accent: '#FFC72C', logo: '/src/assets/Images/Currylogo.webp' },
+      'mclaren-2024': { base: '#FF8700', accent: '#000000', logo: '/src/assets/Images/Landologo.webp' },
+      'malboro-mclaren': { base: '#FF0000', accent: '#FFFFFF', logo: '/src/assets/Images/Sennalogo.webp' },
+      'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000', logo: '/src/assets/Images/Mikalogo.webp' }
+    }}" 
+    x-on:team-selected.window="selectedTeam = $event.detail.team" 
+    :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
+  >
+  <main>
       <div>
-        <Programming />
+        <Programming selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
       </div>
     </main>
   </body>
