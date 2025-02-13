@@ -3,26 +3,24 @@ import "../styles/global.css";
 const { selectedTeam, teamColors } = Astro.props;
 
 ---
-
 <script src="//unpkg.com/alpinejs" defer></script>
 <!-- My Work Section -->
 <section id="work"
-  class="w-full min-h-screen flex-shrink-0 px-8 md:px-16 lg:px-24 flex flex-col items-center justify-center relative pt-20"
+  class="w-full min-h-screen flex-shrink-0 px-4 sm:px-8 md:px-16 lg:px-24 flex flex-col items-center justify-center relative pt-16 md:pt-20"
   :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
 >
-
   <!-- My Work Content -->
   <div class="w-full max-w-6xl mx-auto">
     <!-- Title -->
     <h1
-      class="text-6xl md:text-7xl lg:text-8xl font-bold mb-12 text-center opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90"
+      class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 md:mb-12 text-center opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90"
       :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
     >
       MY WORK
     </h1>
 
     <!-- Portfolio Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full">
       <!-- Programming Portfolio Card -->
       <a
         href="/Portocoding"
@@ -41,7 +39,7 @@ const { selectedTeam, teamColors } = Astro.props;
           class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-100 md:opacity-0 transition-all duration-500 group-hover:opacity-100"
         >
           <h2
-            class="text-4xl font-bold text-center text-white transition-all duration-500"
+            class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-white transition-all duration-500"
           >
             PROGRAMMING
           </h2>
@@ -50,7 +48,7 @@ const { selectedTeam, teamColors } = Astro.props;
 
       <!-- Creative Portfolio Card -->
       <a
-        href="/create"
+        href="/Portocreative"
         class="group relative overflow-hidden rounded-lg aspect-square cursor-pointer opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300"
         :style="selectedTeam ? `border: 2px solid ${teamColors[selectedTeam].accent};` : 'border: 2px solid var(--custom-gold);'"
       >
@@ -66,7 +64,7 @@ const { selectedTeam, teamColors } = Astro.props;
           class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-100 md:opacity-0 transition-all duration-500 group-hover:opacity-100"
         >
           <h2
-            class="text-4xl font-bold text-center text-white transition-all duration-500"
+            class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-white transition-all duration-500"
           >
             CREATIVE
           </h2>
@@ -113,5 +111,4 @@ const { selectedTeam, teamColors } = Astro.props;
     transform: scale(1.05);
     opacity: 0.9;
   }
-
 </style>

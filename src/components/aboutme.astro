@@ -2,34 +2,33 @@
 import "../styles/global.css";
 const { selectedTeam, teamColors } = Astro.props;
 ---
-
 <script src="//unpkg.com/alpinejs" defer></script>
 
 <!-- About Me Section -->
 <section id="aboutme"
-  class="w-full h-screen flex-shrink-0 px-8 md:px-16 lg:px-32 flex flex-col items-center justify-center relative"
+  class="w-full min-h-screen flex-shrink-0 px-4 sm:px-8 md:px-16 lg:px-32 flex flex-col items-center justify-center relative pt-16 md:pt-20"
   :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
 >
   <!-- About Me Content -->
   <div class="w-full max-w-6xl mx-auto text-center">
     <!-- Title Group -->
-    <div class="mb-16">
+    <div class="mb-8 md:mb-16">
       <h1
-        class="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90"
+        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 md:mb-6 opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90"
         :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
       >
         HELLO XPLORERS!
       </h1>
 
       <h2
-        class="text-2xl md:text-3xl lg:text-4xl font-medium mb-8 opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90 font-montserrat"
+        class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium mb-4 md:mb-8 opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90 font-montserrat"
         :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
       >
         My name is Muhammad Khalid Atthoriq
       </h2>
 
       <p
-        class="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90 font-montserrat"
+        class="text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed opacity-0 translate-y-8 animate-initial transition-all duration-1000 hover:scale-105 hover:opacity-90 font-montserrat"
         :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
       >
         I'm a passionate creator with expertise in front-end development,
@@ -39,16 +38,16 @@ const { selectedTeam, teamColors } = Astro.props;
     </div>
 
     <!-- Icons Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 font-montserrat">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 md:mt-8 font-montserrat">
       <!-- CV Card -->
       <button class="group opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300">
-        <div class="flex flex-col items-center space-y-6">
+        <div class="flex flex-col items-center space-y-4 md:space-y-6">
           <div
-            class="w-32 h-32 md:w-36 md:h-36 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+            class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
             :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent};` : 'background-color: var(--custom-pink);'"
           >
             <svg
-              class="w-16 h-16"
+              class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
               :style="selectedTeam ? `color: ${teamColors[selectedTeam].base};` : 'color: var(--custom-black);'"
               fill="none"
               stroke="currentColor"
@@ -63,22 +62,21 @@ const { selectedTeam, teamColors } = Astro.props;
             </svg>
           </div>
           <span
-            class="text-xl font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
+            class="text-lg sm:text-xl font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
-            >My CV</span
-          >
+          >My CV</span>
         </div>
       </button>
 
       <!-- Contact Card -->
       <button class="group opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300">
-        <div class="flex flex-col items-center space-y-6">
+        <div class="flex flex-col items-center space-y-4 md:space-y-6">
           <div
-            class="w-32 h-32 md:w-36 md:h-36 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+            class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
             :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent};` : 'background-color: var(--custom-pink);'"
           >
             <svg
-              class="w-16 h-16"
+              class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
               :style="selectedTeam ? `color: ${teamColors[selectedTeam].base};` : 'color: var(--custom-black);'"
               fill="none"
               stroke="currentColor"
@@ -93,10 +91,9 @@ const { selectedTeam, teamColors } = Astro.props;
             </svg>
           </div>
           <span
-            class="text-xl font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
+            class="text-lg sm:text-xl font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
-            >Contact Me</span
-          >
+          >Contact Me</span>
         </div>
       </button>
     </div>

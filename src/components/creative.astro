@@ -1,0 +1,52 @@
+---
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+// Fetch creative works
+const { data: creativeWorks, error } = await supabase
+  .from('CreativeWorks')
+  .select('*')
+  .order('created_at', { ascending: false });
+
+---
+ 
+</head>
+<script src="//unpkg.com/alpinejs" defer></script>
+<body class="bg-custom-white">
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-5xl font-bold mb-6">Creative Portfolio</h1>
+            <p class="text-xl text-gray-600 max-w-2xl">
+                Exploring visual storytelling through photography, videography, graphic design, and UI/UX design.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6">
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+            {creativeWorks?.map((work, index) => (
+                <article class="work-card gallery-item" style={`--index: ${index}`}>
+                    {work.type === 'videography' ? (
+                        <video class="work-video" controls>
+                            <source src={work.media_url} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    ) : (
+                        <img src={work.media_url} alt={work.title} class="work-image" />
+                    )}
+                    <div class="work-details">
+                        <span class="category-tag">{work.type}</span>
+                        <h3 class="text-xl font-semibold mb-2">{work.title}</h3>
+                        <p class="text-gray-600">{work.description}</p>
+                    </div>
+                </article>
+            ))}
+        </div>
+    </main>
+</body>
+</html>
