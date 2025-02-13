@@ -3,7 +3,8 @@ import '../styles/global.css';
 ---
 
 <nav 
-  class="w-full fixed top-0 z-50 transition-all duration-300 ease-out bg-custom-white pt-2 md:pt-9"
+  client:load
+  class="w-full fixed top-0 z-50 transition-all duration-300 ease-out pt-2 md:pt-9"
   x-data="{ 
     isOpen: false, 
     selectedTeam: null,
@@ -17,16 +18,10 @@ import '../styles/global.css';
     isNavbarVisible: false,
     isMobileMenuOpen: false
   }"
-  @set-team.window="
-    selectedTeam = $event.detail;
-    isMobileMenuOpen = false;
-  "
   :class="selectedTeam ? 'bg-opacity-100' : 'bg-custom-white'"
   :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base}` : ''"
-  x-init="
-    // Trigger navbar entrance animation on page load
-    setTimeout(() => { isNavbarVisible = true; }, 100);
-  "
+  @set-team.window="selectedTeam = $event.detail; isMobileMenuOpen = false;"
+  x-init="setTimeout(() => { isNavbarVisible = true; }, 100)"
   x-transition:enter="transition ease-out duration-500"
   x-transition:enter-start="opacity-0 -translate-y-10"
   x-transition:enter-end="opacity-100 translate-y-0"
@@ -90,7 +85,7 @@ import '../styles/global.css';
           href="#aboutme"
           class="relative group py-2"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-          @click.prevent="activeSection = 1; document.getElementById('aboutme').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false;"
+          @click="activeSection = 1; document.querySelector('#aboutme').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false; $event.preventDefault();"
         >
           <span class="text-2xl font-montserrat relative z-10 transition-colors duration-300 group-hover:text-custom-gold">About Me</span>
           <span class="absolute bottom-0 left-0 w-full h-[1px] bg-custom-gold transform origin-right scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -99,7 +94,7 @@ import '../styles/global.css';
           href="#work"
           class="relative group py-2"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-          @click.prevent="activeSection = 2; document.getElementById('work').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false;"
+          @click="activeSection = 2; document.querySelector('#work').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false; $event.preventDefault();"
         >
           <span class="text-2xl font-montserrat relative z-10 transition-colors duration-300 group-hover:text-custom-gold">My Work</span>
           <span class="absolute bottom-0 left-0 w-full h-[1px] bg-custom-gold transform origin-right scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -182,7 +177,7 @@ import '../styles/global.css';
             href="#aboutme"
             class="block py-2 px-4 rounded-lg hover:bg-opacity-10 hover:bg-white transition-colors duration-200"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-            @click="isMobileMenuOpen = false"
+            @click="activeSection = 1; document.querySelector('#aboutme').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false; $event.preventDefault();"
           >
             About Me
           </a>
@@ -190,7 +185,7 @@ import '../styles/global.css';
             href="#work"
             class="block py-2 px-4 rounded-lg hover:bg-opacity-10 hover:bg-white transition-colors duration-200"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-            @click="isMobileMenuOpen = false"
+            @click="activeSection = 2; document.querySelector('#work').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false; $event.preventDefault();"
           >
             Work
           </a>
