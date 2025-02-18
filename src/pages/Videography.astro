@@ -1,0 +1,55 @@
+---
+import Video from '../components/video.astro';
+import '../styles/global.css';
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/src/styles/extra-styles.css" />
+    <title>Creative Portfolio</title>
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        body {
+          font-size: 14px;
+        }
+        .container {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .card-container {
+          grid-template-columns: 1fr;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        body {
+          font-size: 12px;
+        }
+      }
+      
+      @media (max-width: 200px) {
+        body {
+          font-size: 10px;
+        }
+        .container {
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div>
+        <Video selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
+      </div>
+  </body>
+</html>

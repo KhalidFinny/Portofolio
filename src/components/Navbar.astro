@@ -3,8 +3,7 @@ import '../styles/global.css';
 ---
 
 <nav 
-  client:load
-  class="w-full fixed top-0 z-50 transition-all duration-300 ease-out pt-2 md:pt-9"
+  class="fixed top-0 z-10 pt-2 w-full transition-all duration-300 ease-out bg-custom-white md:pt-3"
   x-data="{ 
     isOpen: false, 
     selectedTeam: null,
@@ -27,12 +26,12 @@ import '../styles/global.css';
   x-transition:enter-end="opacity-100 translate-y-0"
   x-show="isNavbarVisible"
 >
-  <div class="container mx-auto px-4">
-    <div class="flex items-center justify-between h-12 md:h-20">
+  <div class="container px-4 mx-auto">
+    <div class="flex justify-between items-center h-12 md:h-20">
       <!-- Logo with animated background -->
       <div class="relative group">
-        <div class="absolute inset-0 bg-custom-pink rounded-full scale-0 group-hover:scale-100 transition-transform duration-300 ease-out"></div>
-        <a href="/" class="relative block">
+        <div class="absolute inset-0 rounded-full transition-transform duration-300 ease-out scale-0 bg-custom-pink group-hover:scale-100"></div>
+        <a href="/" class="block relative">
           <img 
             :src="selectedTeam ? teamColors[selectedTeam].logo : '/src/assets/Images/myLogo.webp'"
             alt="Logo"
@@ -44,7 +43,7 @@ import '../styles/global.css';
 
       <!-- Hamburger Menu Button (visible on mobile) -->
       <button 
-        class="md:hidden p-1.5 rounded-lg hover:bg-gray-100 focus:outline-none"
+        class="p-1.5 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none"
         @click="isMobileMenuOpen = !isMobileMenuOpen"
         :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
       >
@@ -72,31 +71,31 @@ import '../styles/global.css';
       </button>
 
       <!-- Navigation Links (desktop) -->
-      <div class="hidden md:flex items-center space-x-12">
+      <div class="hidden items-center space-x-12 md:flex font-montserrat">
         <a 
           href="/"
-          class="relative group py-2"
+          class="relative py-2 group"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
         >
-          <span class="text-2xl font-montserrat relative z-10 transition-colors duration-300 group-hover:text-custom-gold">Home</span>
+          <span class="relative z-10 text-2xl transition-colors duration-300 font-montserrat group-hover:text-custom-gold">Home</span>
           <span class="absolute bottom-0 left-0 w-full h-[1px] bg-custom-gold transform origin-right scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
         </a>
         <a 
           href="#aboutme"
-          class="relative group py-2"
+          class="relative py-2 group"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
           @click="activeSection = 1; document.querySelector('#aboutme').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false; $event.preventDefault();"
         >
-          <span class="text-2xl font-montserrat relative z-10 transition-colors duration-300 group-hover:text-custom-gold">About Me</span>
+          <span class="relative z-10 text-2xl transition-colors duration-300 font-montserrat group-hover:text-custom-gold">About Me</span>
           <span class="absolute bottom-0 left-0 w-full h-[1px] bg-custom-gold transform origin-right scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
         </a>
         <a 
           href="#work"
-          class="relative group py-2"
+          class="relative py-2 group"
           :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
           @click="activeSection = 2; document.querySelector('#work').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false; $event.preventDefault();"
         >
-          <span class="text-2xl font-montserrat relative z-10 transition-colors duration-300 group-hover:text-custom-gold">My Work</span>
+          <span class="relative z-10 text-2xl transition-colors duration-300 font-montserrat group-hover:text-custom-gold">My Work</span>
           <span class="absolute bottom-0 left-0 w-full h-[1px] bg-custom-gold transform origin-right scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
         </a>
       </div>
@@ -104,7 +103,7 @@ import '../styles/global.css';
       <!-- Teams Button with creative animation -->
       <div class="relative">
         <button 
-          class="relative overflow-hidden group px-6 py-2 rounded-full border-2 transition-all duration-300"
+          class="overflow-hidden relative px-6 py-2 rounded-full border-2 transition-all duration-300 group"
           :class="isOpen ? 'bg-custom-gold border-custom-gold' : 'border-custom-gold hover:border-custom-pink'"
           :style="selectedTeam ? `border-color: ${teamColors[selectedTeam].accent}` : ''"
           @click="isOpen = !isOpen; isMobileMenuOpen = false"
@@ -112,10 +111,10 @@ import '../styles/global.css';
           :aria-expanded="isOpen"
         >
           <span 
-            class="relative z-10 text-xl font-playfair transition-colors duration-300"
+            class="relative z-10 text-xl transition-colors duration-300 font-playfair"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
           >Teams</span>
-          <div class="absolute inset-0 bg-custom-pink transform origin-left -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+          <div class="absolute inset-0 transition-transform duration-300 transform origin-left -translate-x-full bg-custom-pink group-hover:translate-x-0"></div>
         </button>
 
         <!-- Dropdown with smooth reveal -->
@@ -128,7 +127,7 @@ import '../styles/global.css';
           x-transition:leave-start="opacity-100 translate-y-0"
           x-transition:leave-end="opacity-0 -translate-y-2"
           @click.away="isOpen = false"
-          class="absolute right-0 mt-4 w-52 bg-custom-white rounded-lg shadow-lg overflow-hidden border border-custom-gold"
+          class="overflow-hidden absolute right-0 mt-4 w-52 rounded-lg border shadow-lg bg-custom-white border-custom-gold"
           role="menu"
           aria-orientation="vertical"
         >
@@ -141,7 +140,7 @@ import '../styles/global.css';
               { id: null, name: 'Default' }
             ]">
               <button 
-                class="w-full px-4 py-2 text-left font-playfair text-custom-black hover:bg-custom-pink/20 transition-colors duration-200"
+                class="px-4 py-2 w-full text-left transition-colors duration-200 font-playfair text-custom-black hover:bg-custom-pink/20"
                 :class="selectedTeam === team.id ? 'bg-custom-green/10' : ''"
                 @click="selectedTeam = team.id; isOpen = false; isMobileMenuOpen = false; $dispatch('team-selected', { team: team.id })"
                 x-text="team.name"
@@ -161,13 +160,13 @@ import '../styles/global.css';
         x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 -translate-y-10"
-        class="absolute top-full left-0 right-0 bg-white shadow-lg rounded-b-lg md:hidden"
+        class="absolute right-0 left-0 top-full bg-white rounded-b-lg shadow-lg md:hidden"
         :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base}` : ''"
       >
         <div class="px-4 py-3 space-y-4">
           <a 
             href="/"
-            class="block py-2 px-4 rounded-lg hover:bg-opacity-10 hover:bg-white transition-colors duration-200"
+            class="block px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-opacity-10 hover:bg-white"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
             @click="isMobileMenuOpen = false"
           >
@@ -175,7 +174,7 @@ import '../styles/global.css';
           </a>
           <a 
             href="#aboutme"
-            class="block py-2 px-4 rounded-lg hover:bg-opacity-10 hover:bg-white transition-colors duration-200"
+            class="block px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-opacity-10 hover:bg-white"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
             @click="activeSection = 1; document.querySelector('#aboutme').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false; $event.preventDefault();"
           >
@@ -183,7 +182,7 @@ import '../styles/global.css';
           </a>
           <a 
             href="#work"
-            class="block py-2 px-4 rounded-lg hover:bg-opacity-10 hover:bg-white transition-colors duration-200"
+            class="block px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-opacity-10 hover:bg-white"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
             @click="activeSection = 2; document.querySelector('#work').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false; $event.preventDefault();"
           >
@@ -191,7 +190,7 @@ import '../styles/global.css';
           </a>
           <a 
             href="/Portocoding"
-            class="block py-2 px-4 rounded-lg hover:bg-opacity-10 hover:bg-white transition-colors duration-200"
+            class="block px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-opacity-10 hover:bg-white"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
             @click="isMobileMenuOpen = false"
           >
@@ -199,7 +198,7 @@ import '../styles/global.css';
           </a>
           <a 
             href="/Portocreative"
-            class="block py-2 px-4 rounded-lg hover:bg-opacity-10 hover:bg-white transition-colors duration-200"
+            class="block px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-opacity-10 hover:bg-white"
             :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
             @click="isMobileMenuOpen = false"
           >

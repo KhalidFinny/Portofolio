@@ -23,153 +23,60 @@ const categories = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Programming Projects</title>
-    <style>
-        :root {
-            --custom-white: #ffffff;
-            --custom-black: #000000;
-            --custom-pink: #ff69b4;
-            --custom-gold: #ffd700;
-        }
-
-        @keyframes fadeUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
-
-        article {
-            animation: fadeUp 0.6s ease-out forwards;
-            opacity: 0;
-            animation-delay: calc(var(--index, 0) * 0.1s);
-        }
-
-        main {
-            margin-left: 0;
-        }
-
-        @media (max-width: 1024px) {
-            main {
-                margin-left: 0;
-            }
-        }
-
-        .project-card {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .image-preview {
-            flex: 1;
-            border: 1px solid #e5e5e5;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-left: 1.5rem;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .project-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .card-content {
-                flex-direction: row;
-            }
-        }
-
-        .bg-custom-white {
-            background-color: var(--custom-white);
-        }
-
-        .text-custom-black {
-            color: var(--custom-black);
-        }
-
-        .text-custom-pink {
-            color: var(--custom-pink);
-        }
-
-        .text-custom-gold {
-            color: var(--custom-gold);
-        }
-    </style>
 </head>
 <script src="//unpkg.com/alpinejs" defer></script>
 <body class="bg-custom-white">
     <!-- Hero Section -->
-    <header class="pt-32 pb-20 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+    <header class="px-6 pt-32 pb-20">
+        <div class="grid grid-cols-1 gap-12 mx-auto mt-10 max-w-7xl md:grid-cols-2">
             <div>
-                <h1 class="font-playfair text-6xl md:text-7xl text-custom-black leading-tight">Programming Projects</h1>
-                <div class="w-16 h-1 bg-custom-pink my-8"></div>
-                <p class="font-montserrat text-lg text-custom-black/70 max-w-md">
+                <h1 class="text-7xl font-bold leading-tight font-playfair md:text-7xl text-custom-black">Programming Projects</h1>
+                <div class="my-8 w-16 h-1 bg-custom-pink"></div>
+                <p class="max-w-md text-lg font-montserrat text-custom-black/70">
                 </p>
             </div>
         </div>
     </header>
-
     <!-- Projects Grid -->
     <main class="px-6 pb-20">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 gap-8 mb-10 md:grid-cols-2 lg:grid-cols-3">
             {projects?.map((project, index) => (
-                <article class="group relative overflow-hidden bg-white p-6 project-card" style={`--index: ${index};`}>
-                    <div class="border border-custom-black/10 hover:border-custom-black transition-colors duration-300">
-                        <div class="p-6 card-content flex flex-col gap-6">
+                <article class="overflow-hidden relative p-6 bg-white group project-card" style={`--index: ${index};`}>
+                    <div class="border transition-colors duration-300 border-custom-black/10 hover:border-custom-black">
+                        <div class="flex flex-col gap-6 p-6 card-content">
                             <!-- Text Content -->
                             <div class="flex-1">
-                                <h2 class="font-playfair text-2xl text-custom-black">{project.title}</h2>
-                                <div class="flex flex-col space-y-2 mt-4">
+                                <h2 class="text-2xl font-playfair text-custom-black">{project.title}</h2>
+                                <div class="flex flex-col mt-4 space-y-2">
                                     <a 
                                         href={project.github_repo}
-                                        class="font-montserrat text-sm text-custom-black/70 hover:text-custom-black"
+                                        class="text-sm font-montserrat text-custom-black/70 hover:text-custom-black"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
                                         {project.github_repo}
                                     </a>
-                                    <span class="font-montserrat text-sm text-custom-black/70">
+                                    <span class="text-sm font-montserrat text-custom-black/70">
                                         Website: <span class="text-custom-gold">{project.website}</span>
                                     </span>
                                 </div>
-                                <p class="font-montserrat text-sm text-custom-black/70 my-4">{project.description}</p>
+                                <p class="my-4 text-sm font-montserrat text-custom-black/70">{project.description}</p>
                             </div>
                         </div>
 
                         <!-- Image Preview Container -->
-                        <div class="px-6 pb-6 flex justify-center">
+                        <div class="flex justify-center px-6 pb-6">
                             <div class="image-preview w-full aspect-[16/9] overflow-hidden rounded-lg flex items-center justify-center mr-6">
-                                <div class="w-full h-full flex items-center justify-center">
+                                <div class="flex justify-center items-center w-full h-full">
                                     {project.images ? (
                                         <img 
                                             src={project.images}
                                             alt={project.title}
-                                            onError="this.onerror=null; console.error(`Failed to load image: ${this.src}`);"
-                                            class="project-image w-full h-full object-cover object-center"
+                                            onerror="this.onerror=null; console.error(`Failed to load image: ${this.src}`);"
+                                            class="object-cover object-center w-full h-full project-image"
                                         />
                                     ) : (
-                                        <img src="/path/to/fallback-image.jpg" alt="Fallback Image" class="project-image w-full h-full object-cover object-center" />
+                                        <img src="/path/to/fallback-image.jpg" alt="Fallback Image" class="object-cover object-center w-full h-full project-image" />
                                     )}
                                 </div>
                             </div>
@@ -180,8 +87,8 @@ const categories = [
         </div>
 
         {error && (
-            <div class="max-w-7xl mx-auto mt-12 p-6 bg-custom-pink/10 border border-custom-pink">
-                <p class="font-montserrat text-sm text-custom-black">Unable to load projects. Please try again.</p>
+            <div class="p-6 mx-auto mt-12 max-w-7xl border bg-custom-pink/10 border-custom-pink">
+                <p class="text-sm font-montserrat text-custom-black">Unable to load projects. Please try again.</p>
             </div>
         )}
     </main>
