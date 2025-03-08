@@ -18,10 +18,10 @@ import "../styles/global.css";
       'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000' }
     },
     teamImages: {
-      warriors: '/src/assets/Images/Splashbros.webp',
-      'mclaren-2024': '/src/assets/Images/mcl24.webp',
-      'malboro-mclaren': '/src/assets/Images/Marlboro.webp',
-      'hakkinen-mclaren': '/src/assets/Images/mikapic.webp'
+      warriors: '/Images/Splashbros.webp',
+      'mclaren-2024': '/Images/mcl24.webp',
+      'malboro-mclaren': '/Images/Marlboro.webp',
+      'hakkinen-mclaren': '/Images/mikapic.webp'
     }
   }"
   :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base}` : ''"
@@ -90,7 +90,7 @@ import "../styles/global.css";
         
         <!-- Image with lazy loading -->
         <img
-          :src="selectedTeam ? teamImages[selectedTeam] : '/src/assets/Images/khalid-mainimage.webp'"
+          :src="selectedTeam ? teamImages[selectedTeam] : '/Images/khalid-mainimage.webp'"
           alt="Profile Image"
           loading="lazy"
           class="w-full h-full object-cover rounded-full relative transition-all duration-500"

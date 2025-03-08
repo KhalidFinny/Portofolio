@@ -8,10 +8,10 @@ import Main from '../layout/main.astro';
 
 // Define the teamColors object
 const teamColors = {
-  warriors: { base: '#1D428A', accent: '#FFC72C', logo: '/src/assets/Images/Currylogo.webp' },
-  'mclaren-2024': { base: '#FF8700', accent: '#000000', logo: '/src/assets/Images/Landologo.webp' },
-  'malboro-mclaren': { base: '#FF0000', accent: '#FFFFFF', logo: '/src/assets/Images/Sennalogo.webp' },
-  'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000', logo: '/src/assets/Images/Mikalogo.webp' }
+  warriors: { base: '#1D428A', accent: '#FFC72C', logo: '/Images/Currylogo.webp' },
+  'mclaren-2024': { base: '#FF8700', accent: '#000000', logo: '/Images/Landologo.webp' },
+  'malboro-mclaren': { base: '#FF0000', accent: '#FFFFFF', logo: '/Images/Sennalogo.webp' },
+  'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000', logo: '/Images/Mikalogo.webp' }
 };
 ---
 <script src="//unpkg.com/alpinejs" defer></script>
@@ -64,10 +64,10 @@ const teamColors = {
         'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000' }
       },
       teamImages: {
-        warriors: '/src/assets/Images/Splashbros.webp',
-        'mclaren-2024': '/src/assets/Images/mcl24.webp',
-        'malboro-mclaren': '/src/assets/Images/Marlboro.webp',
-        'hakkinen-mclaren': '/src/assets/Images/mikapic.webp'
+        warriors: '/Images/Splashbros.webp',
+        'mclaren-2024': '/Images/mcl24.webp',
+        'malboro-mclaren': '/Images/Marlboro.webp',
+        'hakkinen-mclaren': '/Images/mikapic.webp'
       }
     }"
     :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base}` : ''"

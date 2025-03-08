@@ -9,10 +9,10 @@ import '../styles/global.css';
     selectedTeam: null,
     activeSection: 0,
     teamColors: {
-      warriors: { base: '#1D428A', accent: '#FFC72C', logo: '/src/assets/Images/Currylogo.webp' },
-      'mclaren-2024': { base: '#FF8700', accent: '#000000', logo: '/src/assets/Images/Landologo.webp' },
-      'malboro-mclaren': { base: '#FF0000', accent: '#FFFFFF', logo: '/src/assets/Images/Sennalogo.webp' },
-      'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000', logo: '/src/assets/Images/Mikalogo.webp' }
+      warriors: { base: '#1D428A', accent: '#FFC72C', logo: '/Images/Currylogo.webp' },
+      'mclaren-2024': { base: '#FF8700', accent: '#000000', logo: '/Images/Landologo.webp' },
+      'malboro-mclaren': { base: '#FF0000', accent: '#FFFFFF', logo: '/Images/Sennalogo.webp' },
+      'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000', logo: '/Images/Mikalogo.webp' }
     },
     isNavbarVisible: false,
     isMobileMenuOpen: false
@@ -33,7 +33,7 @@ import '../styles/global.css';
         <div class="absolute inset-0 rounded-full transition-transform duration-300 ease-out scale-0 bg-custom-pink group-hover:scale-100"></div>
         <a href="/" class="block relative">
           <img 
-            :src="selectedTeam ? teamColors[selectedTeam].logo : '/src/assets/Images/myLogo.webp'"
+            :src="selectedTeam ? teamColors[selectedTeam].logo : '/Images/myLogo.webp'"
             alt="Logo"
             class="w-[100px] md:w-[150px] h-auto transition-all duration-300 group-hover:scale-110"
             loading="lazy"
