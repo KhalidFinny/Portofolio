@@ -1,15 +1,10 @@
 ---
 import Video from '../components/video.astro';
 import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Main from '../layout/main.astro';
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="/src/styles/extra-styles.css" />
-    <title>Creative Portfolio</title>
-    <link rel="stylesheet" href="/src/styles/global.css" />
+<Main tittle="Videography" description="My Videography">
     <style>
       html {
         scroll-behavior: smooth;
@@ -49,7 +44,11 @@ import '../styles/global.css';
   <body>
     <main>
       <div>
+        <Navbar selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
+      </div>
+      <div>
         <Video selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
       </div>
   </body>
 </html>
+</Main>

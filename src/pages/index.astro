@@ -14,6 +14,7 @@ const teamColors = {
   'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000', logo: '/src/assets/Images/Mikalogo.webp' }
 };
 ---
+<script src="//unpkg.com/alpinejs" defer></script>
 <Main title="Khalid" description="Welcome to my personal portfolio"> 
     <style>
       html {
@@ -48,18 +49,36 @@ const teamColors = {
       }
     </style>
   </head>
-  <body 
-    class="bg-custom-white" 
-    x-data="{ selectedTeam: null, teamColors: { 
-      warriors: { base: '#1D428A', accent: '#FFC72C', logo: '/src/assets/Images/Currylogo.webp' },
-      'mclaren-2024': { base: '#FF8700', accent: '#000000', logo: '/src/assets/Images/Landologo.webp' },
-      'malboro-mclaren': { base: '#FF0000', accent: '#FFFFFF', logo: '/src/assets/Images/Sennalogo.webp' },
-      'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000', logo: '/src/assets/Images/Mikalogo.webp' }
-    }}" 
-    x-on:team-selected.window="selectedTeam = $event.detail.team" 
-    :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base};` : 'background-color: var(--custom-white);'"
+  <body>
+    <main 
+    id="home"
+    class="min-h-screen w-full mt-10 bg-[#F5F5F5] relative overflow-hidden pt-16 md:pt-20"
+    x-data="{
+      hover: false, 
+      loaded: false, 
+      selectedTeam: null,
+      teamColors: {
+        warriors: { base: '#1D428A', accent: '#FFC72C' },
+        'mclaren-2024': { base: '#FF8700', accent: '#000000' },
+        'malboro-mclaren': { base: '#FF0000', accent: '#FFFFFF' },
+        'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000' }
+      },
+      teamImages: {
+        warriors: '/src/assets/Images/Splashbros.webp',
+        'mclaren-2024': '/src/assets/Images/mcl24.webp',
+        'malboro-mclaren': '/src/assets/Images/Marlboro.webp',
+        'hakkinen-mclaren': '/src/assets/Images/mikapic.webp'
+      }
+    }"
+    :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].base}` : ''"
+    x-init="
+      setTimeout(() => loaded = true, 100);
+      window.addEventListener('team-selected', (event) => {
+        selectedTeam = event.detail.team;
+      });
+    "
   >
-  <main>
+    <div>
     <Navbar selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
     <section id="home">
       <Hero selectedTeam="{selectedTeam}" teamColors="{teamColors}" />

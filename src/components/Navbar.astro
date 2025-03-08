@@ -103,7 +103,7 @@ import '../styles/global.css';
       <!-- Teams Button with creative animation -->
       <div class="relative">
         <button 
-          class="overflow-hidden relative px-6 py-2 rounded-full border-2 transition-all duration-300 group"
+          class="overflow-hidden relative px-6 py-2 rounded-full border-2 transition-all duration-300 group md:px-6 md:py-2"
           :class="isOpen ? 'bg-custom-gold border-custom-gold' : 'border-custom-gold hover:border-custom-pink'"
           :style="selectedTeam ? `border-color: ${teamColors[selectedTeam].accent}` : ''"
           @click="isOpen = !isOpen; isMobileMenuOpen = false"
@@ -111,8 +111,8 @@ import '../styles/global.css';
           :aria-expanded="isOpen"
         >
           <span 
-            class="relative z-10 text-xl transition-colors duration-300 font-playfair"
-            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
+        class="relative z-10 text-xl transition-colors duration-300 font-playfair md:text-xl text-sm"
+        :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
           >Teams</span>
           <div class="absolute inset-0 transition-transform duration-300 transform origin-left -translate-x-full bg-custom-pink group-hover:translate-x-0"></div>
         </button>
@@ -187,24 +187,7 @@ import '../styles/global.css';
             @click="activeSection = 2; document.querySelector('#work').scrollIntoView({ behavior: 'smooth' }); isMobileMenuOpen = false; $event.preventDefault();"
           >
             Work
-          </a>
-          <a 
-            href="/Portocoding"
-            class="block px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-opacity-10 hover:bg-white"
-            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-            @click="isMobileMenuOpen = false"
-          >
-            Coding Portfolio
-          </a>
-          <a 
-            href="/Portocreative"
-            class="block px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-opacity-10 hover:bg-white"
-            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent}` : ''"
-            @click="isMobileMenuOpen = false"
-          >
-            Creative Portfolio
-          </a>
-        </div>
+          </a>        </div>
       </div>
     </div>
   </div>
