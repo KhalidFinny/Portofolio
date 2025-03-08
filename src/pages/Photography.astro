@@ -2,6 +2,7 @@
 import Photo from '../components/photo.astro';
 import Navbar from '../components/Navbar.astro';
 import '../styles/global.css';
+import Main from '../layout/main.astro';
 // Define the teamColors object
 const teamColors = {
   warriors: { base: '#1D428A', accent: '#FFC72C', logo: '/src/assets/Images/Currylogo.webp' },
@@ -10,14 +11,7 @@ const teamColors = {
   'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000', logo: '/src/assets/Images/Mikalogo.webp' }
 };
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="/src/styles/extra-styles.css" />
-    <title>Creative Portfolio</title>
-    <link rel="stylesheet" href="/src/styles/global.css" />
+<Main title="Photography">
     <style>
       html {
         scroll-behavior: smooth;
@@ -77,4 +71,4 @@ const teamColors = {
         <Photo selectedTeam="{selectedTeam}" teamColors="{teamColors}" />
       </div>
   </body>
-</html>
+</Main>

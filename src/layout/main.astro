@@ -1,0 +1,36 @@
+---
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta name="google-site-verification" content="tQTXVkzEUW0SlRMTfwUyDkbyRNCfHOJYrB4vXf2QLZQ" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta property="og:image" content="/e5-bg.webp" />
+    <meta name="twitter:image" content="/e5-bg.webp" />
+
+    <title>{title} | Personal Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://atugatran.github.io/FontAwesome6Pro/css/all.min.css" />
+    <link rel="icon" href="/" type="image/x-icon" />  
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  </head>
+  <body class="relative min-h-screen w-full overflow-auto">
+    <main class="max-w-full bg-[#F5F5F5]">
+      <slot />
+    </main>
+  </body>
+</html>

@@ -1,112 +1,73 @@
 ---
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-// Fetch projects
-const { data: projects, error } = await supabase
-  .from('Projects')
-  .select('*')
-  .order('created_at', { ascending: false });
-
+import { projects } from './data/data.astro';
 // Categories for side navigation
 const categories = [
-  { id: 'all', name: 'All', count: projects?.length || 0 },
-  { id: 'frontend', name: 'Front-End', count: projects?.filter(p => p.Type === 'Frontend').length || 0 },
-  { id: 'coming-soon', name: 'Coming Soon', count: 0 }
+    { id: 'all', name: 'All', count: projects.length },
+    { id: 'frontend', name: 'Front-End', count: projects.filter(p => p.Type === 'Frontend').length },
+    { id: 'coming-soon', name: 'Coming Soon', count: 0 }
 ];
 ---
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programming Projects</title>
-</head>
 <script src="//unpkg.com/alpinejs" defer></script>
 <body class="bg-custom-white">
-    <!-- Hero Section -->
-    <header class="px-6 pt-32 pb-20">
-        <div class="grid grid-cols-1 gap-12 mx-auto mt-10 max-w-7xl md:grid-cols-2">
-            <div>
-                <h1 class="text-7xl font-bold leading-tight font-playfair md:text-7xl text-custom-black">Programming Projects</h1>
-                <div class="my-8 w-16 h-1 bg-custom-pink"></div>
-                <p class="max-w-md text-lg font-montserrat text-custom-black/70">
-                </p>
-            </div>
-        </div>
-    </header>
-    <!-- Projects Grid -->
-    <main class="px-6 pb-20">
-        <div class="grid grid-cols-1 gap-8 mb-10 md:grid-cols-2 lg:grid-cols-3">
-            {projects?.map((project, index) => (
-                <article class="overflow-hidden relative p-6 bg-white group project-card" style={`--index: ${index};`}>
-                    <div class="border transition-colors duration-300 border-custom-black/10 hover:border-custom-black">
-                        <div class="flex flex-col gap-6 p-6 card-content">
-                            <!-- Text Content -->
-                            <div class="flex-1">
-                                <h2 class="text-2xl font-playfair text-custom-black">{project.title}</h2>
-                                <div class="flex flex-col mt-4 space-y-2">
-                                    <a 
-                                        href={project.github_repo}
-                                        class="text-sm font-montserrat text-custom-black/70 hover:text-custom-black"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {project.github_repo}
-                                    </a>
-                                    <span class="text-sm font-montserrat text-custom-black/70">
-                                        Website: <span class="text-custom-gold">{project.website}</span>
-                                    </span>
-                                </div>
-                                <p class="my-4 text-sm font-montserrat text-custom-black/70">{project.description}</p>
-                            </div>
+        <!-- Hero Section -->
+        <header class="px-6 pt-32 pb-20">
+                <div class="grid grid-cols-1 gap-12 mx-auto mt-10 max-w-7xl md:grid-cols-2">
+                        <div>
+                                <h1 class="text-7xl font-bold leading-tight font-playfair md:text-7xl text-custom-black">Programming Projects</h1>
+                                <div class="my-8 w-16 h-1 bg-custom-pink"></div>
+                                <p class="max-w-md text-lg font-montserrat text-custom-black/70">
+                                </p>
                         </div>
+                </div>
+        </header>
+        <!-- Projects Grid -->
+        <main class="px-6 pb-20">
+                <div class="grid grid-cols-1 gap-8 mb-10 md:grid-cols-2 lg:grid-cols-3">
+                        {projects.map((project, index) => (
+                                <article class="overflow-hidden relative p-6 bg-white group project-card" style={`--index: ${index};`}>
+                                        <div class="border transition-colors duration-300 border-custom-black/10 hover:border-custom-black">
+                                                <div class="flex flex-col gap-6 p-6 card-content">
+                                                        <!-- Text Content -->
+                                                        <div class="flex-1">
+                                                                <h2 class="text-2xl font-playfair text-custom-black">{project.title}</h2>
+                                                                <div class="flex flex-col mt-4 space-y-2">
+                                                                        <a 
+                                                                                href={project.github_repo}
+                                                                                class="text-sm font-montserrat text-custom-black/70 hover:text-custom-black"
+                                                                                target="_blank"
+                                                                                rel="noopener noreferrer"
+                                                                        >
+                                                                                {project.github_repo}
+                                                                        </a>
+                                                                        <span class="text-sm font-montserrat text-custom-black/70">
+                                                                                Website: <span class="text-custom-gold">{project.website}</span>
+                                                                        </span>
+                                                                </div>
+                                                                <p class="my-4 text-sm font-montserrat text-custom-black/70">{project.description}</p>
+                                                        </div>
+                                                </div>
 
-                        <!-- Image Preview Container -->
-                        <div class="flex justify-center px-6 pb-6">
-                            <div class="image-preview w-full aspect-[16/9] overflow-hidden rounded-lg flex items-center justify-center mr-6">
-                                <div class="flex justify-center items-center w-full h-full">
-                                    {project.images ? (
-                                        <img 
-                                            src={project.images}
-                                            alt={project.title}
-                                            onerror="this.onerror=null; console.error(`Failed to load image: ${this.src}`);"
-                                            class="object-cover object-center w-full h-full project-image"
-                                        />
-                                    ) : (
-                                        <img src="/path/to/fallback-image.jpg" alt="Fallback Image" class="object-cover object-center w-full h-full project-image" />
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            ))}
-        </div>
-
-        {error && (
-            <div class="p-6 mx-auto mt-12 max-w-7xl border bg-custom-pink/10 border-custom-pink">
-                <p class="text-sm font-montserrat text-custom-black">Unable to load projects. Please try again.</p>
-            </div>
-        )}
-    </main>
-
-    <script>
-        // Simple category filtering
-        document.addEventListener('DOMContentLoaded', () => {
-            const categoryLinks = document.querySelectorAll('a[href^="#"]');
-            categoryLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const target = e.currentTarget as HTMLElement;
-                    const category = target.getAttribute('href')?.slice(1) || '';
-                    // Add your filtering logic here
-                    console.log('Selected category:', category);
-                });
-            });
-        });
-    </script>
+                                                <!-- Image Preview Container -->
+                                                <div class="flex justify-center px-6 pb-6">
+                                                        <div class="image-preview w-full aspect-[16/9] overflow-hidden rounded-lg flex items-center justify-center mr-6">
+                                                                <div class="flex justify-center items-center w-full h-full">
+                                                                        {project.images ? (
+                                                                                <img 
+                                                                                        src={project.images}
+                                                                                        alt={project.title}
+                                                                                        onerror="this.onerror=null; console.error(`Failed to load image: ${this.src}`);"
+                                                                                        class="object-cover object-center w-full h-full project-image"
+                                                                                />
+                                                                        ) : (
+                                                                                <img src="/path/to/fallback-image.jpg" alt="Fallback Image" class="object-cover object-center w-full h-full project-image" />
+                                                                        )}
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </article>
+                        ))}
+                </div>
+        </main>
 </body>
 </html>

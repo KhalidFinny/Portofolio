@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import '../styles/global.css';
 import Aboutme from '../components/aboutme.astro';
 import Work from '../components/work.astro';
+import Main from '../layout/main.astro';
 
 // Define the teamColors object
 const teamColors = {
@@ -13,12 +14,7 @@ const teamColors = {
   'hakkinen-mclaren': { base: '#C0C0C0', accent: '#000000', logo: '/src/assets/Images/Mikalogo.webp' }
 };
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <title>My Portfolio</title>
+<Main title="Khalid" description="Welcome to my personal portfolio"> 
     <style>
       html {
         scroll-behavior: smooth;
@@ -76,4 +72,4 @@ const teamColors = {
     </section>
   </main>
   </body>
-</html>
+</Main>
