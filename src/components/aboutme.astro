@@ -67,35 +67,33 @@ const { selectedTeam, teamColors } = Astro.props;
           >My CV</span>
         </div>
       </button>
-
-      <!-- Contact Card -->
-      <button class="group opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300">
+      <a href="https://linktr.ee/KhalidFinny" target="_blank" class="group opacity-0 translate-y-8 animate-initial transition-all duration-1000 delay-300 ">
         <div class="flex flex-col items-center space-y-4 md:space-y-6">
           <div
-            class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
-            :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent};` : 'background-color: var(--custom-pink);'"
+        class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+        :style="selectedTeam ? `background-color: ${teamColors[selectedTeam].accent};` : 'background-color: #FFC0CB;'"
           >
-            <svg
-              class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
-              :style="selectedTeam ? `color: ${teamColors[selectedTeam].base};` : 'color: var(--custom-black);'"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
-              ></path>
-            </svg>
+        <svg
+          class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 "
+          :style="selectedTeam ? `color: ${teamColors[selectedTeam].base};` : 'color: var(--custom-black);'"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+          ></path>
+        </svg>
           </div>
           <span
-            class="text-lg sm:text-xl font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
-            :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
+        class="text-lg sm:text-xl font-semibold transition-all duration-300 group-hover:scale-105 font-montserrat"
+        :style="selectedTeam ? `color: ${teamColors[selectedTeam].accent};` : 'color: var(--custom-black);'"
           >Contact Me</span>
         </div>
-      </button>
+      </a>
     </div>
   </div>
 </section>
